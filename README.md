@@ -1,6 +1,8 @@
 # tree-style-tab-modo-theme
 Based on doublejim’s [tree-style-tab-compact-dark-style](https://github.com/doublejim/tree-style-tab-compact-dark-style). If this is your first time using Tree Style Tab, his respository contains a nice guide for setting it up.
 
+<img alt="screenshot" src="https://raw.githubusercontent.com/plu5/tree-style-tab-modo-theme/master/screenshot.png"/>
+
 Here is the theme I made based on his. To use it, paste this in <kbd>Tree Style Tab options > Advanced > Extra style rules</kbd>.
 
 ```css
