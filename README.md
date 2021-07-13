@@ -97,7 +97,6 @@ tab-item .extra-items-container.indent {
 .tab.active {
   color: black;
   background-color: var(--colorA);
-  border-left: solid;
 }
 .tab.active:hover {
   background-color: var(--colorA);
