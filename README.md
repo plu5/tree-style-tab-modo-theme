@@ -3,13 +3,13 @@ Based on doublejim’s [tree-style-tab-compact-dark-style](https://github.com/do
 
 <img alt="screenshot" src="https://raw.githubusercontent.com/plu5/tree-style-tab-modo-theme/master/screenshot.png"/>
 
-Here is the theme I made based on his. To use it, paste this in <kbd>Tree Style Tab options > Advanced > Extra style rules</kbd>.
+Here is the theme I made based on his. To use it, paste this in <kbd>Tree Style Tab options > Advanced > Extra style rules</kbd>, and set theme to <kbd>No Decoration</kbd>.
 
 ```css
 :root {
   --colorA: #eedc82; /* selected tab colour */
   --colorB: #5E686D; /* background colour */
-  --tab-height: 21px;
+  --tab-height: 19px;
   --font-size: 11px;
 }
 
@@ -17,9 +17,14 @@ Here is the theme I made based on his. To use it, paste this in <kbd>Tree Style 
   background: var(--colorB);
 }
 
-/* Move X a bit to the right */
-tab-closebox::after {
-  margin-right: -6px;
+/* indented area before tab */
+tab-item .extra-items-container.indent {
+  background-color: var(--colorB);
+}
+
+/* White X */
+:root.simulate-svg-context-fill .closebox::after {
+  background: white;
 }
 
 /* Closebox only on hover */
@@ -29,7 +34,7 @@ tab-closebox::after {
 
 /* Move twisty a bit to the left */
 .tab .twisty {
-  margin-left: -5px;
+  margin-left: -2px;
 }
 
 /* Colour of twisty on active tab */
@@ -63,6 +68,7 @@ tab-closebox::after {
   background: white;
 }
 
+
 .tab {
   height: var(--tab-height);
   border: none;
@@ -71,6 +77,10 @@ tab-closebox::after {
 
 .label {
   font-size: var(--font-size);
+  margin-top: -2px;
+  margin-left: 2px;
+  color: white;
+  line-height: var(--tab-height);
 }
 .tab .label {
   color: white;
@@ -87,6 +97,7 @@ tab-closebox::after {
 .tab.active {
   color: black;
   background-color: var(--colorA);
+  border-left: solid;
 }
 .tab.active:hover {
   background-color: var(--colorA);
@@ -106,7 +117,8 @@ tab-closebox::after {
 /* Add private browsing indicator per tab */
 .tab.private-browsing .label:before {content: "🕶 ";}
 
-/* ----- Tab counting ----- */
+
+/* ----- Tab counter ----- */
 #tabbar {
   counter-reset: vtabs atabs tabs;
   /* vtabs tracks visible tabs, atabs tracks active tabs, tabs tracks all tabs */
@@ -123,29 +135,28 @@ tab-item:not(.discarded) {
 tab-item {
   counter-increment: tabs;
 }
-/* Add count near new tab button */
-.newtab-button::after {
+.newtab-button::before {
+  color: white;
   content: var(--tab-count-text);
   pointer-events: none;
     
   position: absolute;
   left: 0.5em;
-  margin-top: 2px;
-
-  /* TST 2.4.0 - Fix for Issue #1664 */
-  background: transparent !important;
-  mask: none !important;
 }
 .newtab-button {
   --tab-count-text: counter(tabs) " tabs";
   margin-top: 2px;
   font-size: 11px;
-  background: var(--colorB) !important;
+  border-top: solid 1px rgba(255, 255, 255, .4);
+  border-bottom: solid 1px rgba(255, 255, 255, .4);
 }
-/* Smaller + on new tab button */
-.newtab-button:before {
-  width:13px;
+:root.simulate-svg-context-fill .newtab-button::after {
+  background: white;
+  width: 13px;
+  height: 12px;
+  margin-top: 1px;
 }
+
 
 /* ----- Specific domains ----- */
 tab-item[data-current-uri^="https://github.com"] {
