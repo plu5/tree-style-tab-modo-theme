@@ -174,3 +174,163 @@ tab-item[data-current-uri^="about:"] {
   background-color: #726558;
 }
 ```
+
+## Mono variant
+
+<img alt="screenshot-mono" src="https://raw.githubusercontent.com/plu5/tree-style-tab-modo-theme/master/screenshot-mono.png"/>
+
+```css
+:root {
+  --active-bg: #eedc82;      /* active tab colour */
+  --bg: black;               /* background colour */
+  --tab-bg: #333;            /* normal tab background colour */
+  --fg: white;               /* normal tab foreground colour */
+  --active-fg: black;        /* active tab foreground colour */
+  --num-fg: #F63737;         /* num tabs on collapsed tree colour */
+  --active-twisty-fg: grey;  /* twisty glyph on active tab colour */
+  --tab-height: 19px;
+  --font-size: 11px;
+}
+
+#background {
+  background: var(--bg);
+}
+
+/* indented area before tab */
+tab-item .extra-items-container.indent {
+  background-color: var(--bg);
+}
+
+/* Colour of closebox on normal tab */
+:root.simulate-svg-context-fill .closebox::after {
+  background: var(--fg);
+}
+
+/* Closebox only on hover */
+#tabbar tab-item:not(:hover) tab-closebox {
+  display: none;
+}
+
+/* Move twisty a bit to the left */
+.tab .twisty {
+  margin-left: -2px;
+}
+
+/* Colour of twisty on active tab */
+:root.simulate-svg-context-fill .tab.active .twisty::before {
+  background: var(--active-twisty-fg);
+}
+
+/* Colour of closebox on active tab */
+:root.simulate-svg-context-fill .tab.active .closebox::after {
+  background: var(--active-fg);
+}
+:root.simulate-svg-context-fill .tab.active:hover .closebox::after {
+  background: var(--active-fg);
+}
+
+/* Colour of closebox on hover */
+:root.simulate-svg-context-fill .tab:hover .closebox::after {
+  background: var(--fg);
+}
+
+/* Colour of soundbutton on active tab  */
+:root.simulate-svg-context-fill .tab.active .sound-button::after {
+  background: var(--active-fg);
+}
+:root.simulate-svg-context-fill .tab.active:hover .sound-button::after {
+  background: var(--active-fg);
+}
+
+/* Colour of soundbutton on hover */
+:root.simulate-svg-context-fill .tab:hover .sound-button::after {
+  background: var(--fg);
+}
+
+
+.tab {
+  height: var(--tab-height);
+  border: none;
+  background: var(--tab-bg);
+}
+
+.label {
+  font-size: var(--font-size);
+  margin-top: -2px;
+  margin-left: 2px;
+  color: var(--fg);
+  line-height: var(--tab-height);
+}
+.tab .label {
+  color: var(--fg);
+}
+.tab.active .label {
+  color: var(--active-fg);
+}
+
+/* Style of the label that shows number of tabs (#) on collapsed trees */
+.tab .counter {
+  color: var(--num-fg);
+}
+
+.tab.active {
+  color: var(--active-fg);
+  background-color: var(--active-bg);
+}
+.tab.active:hover {
+  background-color: var(--active-bg);
+}
+
+/* Styling of unread tabs */
+.tab.unread .label {
+  opacity: 0.5;
+}
+
+/* Styling of pending (unloaded) tabs */
+.tab.discarded {
+  background: var(--bg);
+}
+
+/* Add private browsing indicator per tab */
+.tab.private-browsing .label:before {content: "🕶 ";}
+
+
+/* ----- Tab counter ----- */
+#tabbar {
+  counter-reset: vtabs atabs tabs;
+  /* vtabs tracks visible tabs, atabs tracks active tabs, tabs tracks all tabs */
+}
+tab-item:not(.collapsed):not(.discarded) {
+  counter-increment: vtabs atabs tabs;
+}
+tab-item:not(.collapsed) {
+  counter-increment: vtabs tabs;
+}
+tab-item:not(.discarded) {
+  counter-increment: atabs tabs;
+}
+tab-item {
+  counter-increment: tabs;
+}
+.newtab-button::before {
+  color: var(--fg);
+  content: var(--tab-count-text);
+  pointer-events: none;
+
+  position: absolute;
+  left: 0.5em;
+}
+.newtab-button {
+  --tab-count-text: counter(tabs) " tabs";
+  margin-top: 2px;
+  font-size: 11px;
+  border-top: solid 1px rgba(255, 255, 255, .4);
+  border-bottom: solid 1px rgba(255, 255, 255, .4);
+}
+:root.simulate-svg-context-fill .newtab-button::after {
+  background: var(--fg);
+  width: 13px;
+  height: 12px;
+  margin-top: 1px;
+}
+```
